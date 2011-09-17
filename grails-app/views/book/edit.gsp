@@ -7,9 +7,11 @@
 </head>
 
 <body>
+<g:hasErrors>
 <div class="errors">
     <g:renderErrors/>
 </div>
+</g:hasErrors>
 <g:form name="editBook" action="doEdit" id="${book.BookId}">
     <table>
         <tr>
