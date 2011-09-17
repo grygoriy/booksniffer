@@ -8,7 +8,7 @@ class UrlMappings {
 		}
 
 		//"/"(view:"/index")
-        "/"(view:"/book/list")
+        "/"(action:"list", controller:"book")
 		"500"(view:'/error')
 	}
 }
