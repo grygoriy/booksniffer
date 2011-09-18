@@ -26,7 +26,7 @@ $(document).ready(function() {
                             '<tr>' +
                             '<td class="isbnRow">' + result.isbn + '</td>' +
                             '<td class="titleRow">' + result.title + '</td>' +
-                            '<td class="languageRow">' + result.language.title + '</td>' +
+                            '<td class="languageRow">' + result.language + '</td>' +
                             '<td class="editRow"><a htref="book/edit/' + result.BookId + '">' + $("#editValue").val() + ' </a></td>' +
                             '<td class="deleteRow"><a htref="book/delete/' + result.BookId + '">' + $("#deleteValue").val() + ' </a></td>' +
                             '</tr>')

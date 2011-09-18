@@ -25,7 +25,8 @@ class BookController {
         }
         def elementsPerPage = grailsApplication.config.booksniffer.pages.books
         def offset = elementsPerPage * (page -1)
-        render Book.list(offset:offset, max:elementsPerPage) as JSON
+        def books = Book.list(offset:offset, max:elementsPerPage)
+        render books.collect {[bookId:it.BookId, title: it.title, isbn:it.isbn,language:it.language.title]} as JSON
     }
 
     def delete = {
