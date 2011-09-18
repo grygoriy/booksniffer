@@ -11,7 +11,7 @@ class Book {
         title(nullable: false, blank: false)
         BookId(nullable: true, blank: true)
     }
-
+                                            m
     static mapping = {
         table 'Book'
         columns {

@@ -4,6 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
     <title><g:message code="book.list.title"/></title>
+    <g:javascript library="jquery-1.6.4.min" />
+    <g:javascript library="jquery.pagination" />
+    <g:javascript library="booklist" />
+    <link rel="stylesheet" href="${resource(dir:'css',file:'pagination.css')}" />
 </head>
 
 <body>
@@ -30,5 +34,6 @@
         <td><g:link action="add">${message(code: 'add')}</g:link></td>
     </tr>
 </table>
+<div id="pagingArea"></div>
 </body>
 </html>
