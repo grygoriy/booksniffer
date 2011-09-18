@@ -1,7 +1,7 @@
 package com.booksniffer
 
 class Book {
-    String BookId
+    String BookId = ""
     String isbn
     String title
     Language language
@@ -17,10 +17,11 @@ class Book {
         columns {
             id column: 'BookId', index: 'Book_BookId_Idx'
         }
+        autoTimestamp false
         version false
     }
 
-    transient beforeInsert = {
-        BookId = java.util.UUID.randomUUID().toString()
+     def beforeInsert = {
+        BookId = UUID.randomUUID().toString()
     }
 }
