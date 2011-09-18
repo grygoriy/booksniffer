@@ -11,11 +11,12 @@ class Book {
         title(nullable: false, blank: false)
         BookId(nullable: true, blank: true)
     }
-                                            m
+
     static mapping = {
         table 'Book'
         columns {
             id column: 'BookId', index: 'Book_BookId_Idx'
+            language lazy: false
         }
         autoTimestamp false
         version false

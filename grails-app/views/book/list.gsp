@@ -11,7 +11,12 @@
 </head>
 
 <body>
-<div id="bookList">
+<div >
+
+ <g:hiddenField name="pages" value="${pages}"/>
+ <g:hiddenField name="editValue" value="${message(code: 'edit')} "/>
+ <g:hiddenField name="deleteValue" value="${message(code: 'delete')} "/>
+
 <table id="bookListHeader">
     <tr>
         <td id="isbnHeader">${message(code: 'book.isbn')}</td>
@@ -37,7 +42,7 @@
         <td><g:link action="add">${message(code: 'add')}</g:link></td>
     </tr>
 </table>
-<g:hiddenField name="pages" value="${pages}"/>
+
 <ul id="pagination"></ul>
 </div>
 </body>

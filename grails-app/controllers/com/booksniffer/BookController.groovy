@@ -1,14 +1,31 @@
 package com.booksniffer
 
+import grails.converters.JSON
+import org.apache.commons.lang.StringUtils
+import org.hibernate.FetchMode
+
 class BookController {
     static defaultAction = "list"
 
     def list = {
-        def elementsPerPage = (Integer)grailsApplication.config.booksniffer.pages.books
+        def elementsPerPage = grailsApplication.config.booksniffer.pages.books
         def books = Book.list(max:elementsPerPage)
         Long bookAmount = Book.count()
         def pages = (bookAmount / elementsPerPage).longValue()
         [books: books, pages: pages]
+    }
+
+    def booksonpage = {
+        Integer page;
+        String pageParam = params.page;
+        if (!pageParam?.isEmpty() && pageParam?.isInteger() ) {
+            page = Integer.valueOf(pageParam)
+        } else {
+            page = 1
+        }
+        def elementsPerPage = grailsApplication.config.booksniffer.pages.books
+        def offset = elementsPerPage * (page -1)
+        render Book.list(offset:offset, max:elementsPerPage) as JSON
     }
 
     def delete = {
