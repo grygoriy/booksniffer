@@ -85,3 +85,10 @@ log4j = {
 
     warn   'org.mortbay.log'
 }
+
+
+booksniffer {
+    pages {
+        books = 10
+    }
+}

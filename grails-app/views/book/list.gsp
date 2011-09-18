@@ -5,27 +5,30 @@
     <meta name="layout" content="main"/>
     <title><g:message code="book.list.title"/></title>
     <g:javascript library="jquery-1.6.4.min" />
-    <g:javascript library="jquery.pagination" />
     <g:javascript library="booklist" />
     <link rel="stylesheet" href="${resource(dir:'css',file:'pagination.css')}" />
+    <link rel="stylesheet" href="${resource(dir:'css',file:'bookList.css')}" />
 </head>
 
 <body>
-<table>
+<div id="bookList">
+<table id="bookListHeader">
     <tr>
-        <td>${message(code: 'book.isbn')}</td>
-        <td>${message(code: 'book.title')}</td>
-        <td>${message(code: 'book.language')}</td>
+        <td id="isbnHeader">${message(code: 'book.isbn')}</td>
+        <td id="titleHeader">${message(code: 'book.title')}</td>
+        <td id="languageHeader">${message(code: 'book.language')}</td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
     </tr>
+    </table>
+    <table id="bookList">
     <g:each in="${books}" var="book">
         <tr>
-            <td>${book.isbn}</td>
-            <td>${book.title}</td>
-            <td>${book.language.title}</td>
-            <td><g:link  action="edit" params="${[id:book.BookId]}">${message(code: 'edit')} </g:link></td>
-            <td><g:link  action="delete" params="${[id:book.BookId]}">${message(code: 'delete')}</g:link></td>
+            <td class="isbnRow">${book.isbn}</td>
+            <td class="titleRow">${book.title}</td>
+            <td class="languageRow">${book.language.title}</td>
+            <td class="editRow"><g:link  action="edit" params="${[id:book.BookId]}">${message(code: 'edit')} </g:link></td>
+            <td class="deleteRow"><g:link  action="delete" params="${[id:book.BookId]}">${message(code: 'delete')}</g:link></td>
         </tr>
     </g:each>
 </table>
@@ -34,6 +37,8 @@
         <td><g:link action="add">${message(code: 'add')}</g:link></td>
     </tr>
 </table>
-<div id="pagingArea"></div>
+<g:hiddenField name="pages" value="${pages}"/>
+<ul id="pagination"></ul>
+</div>
 </body>
 </html>

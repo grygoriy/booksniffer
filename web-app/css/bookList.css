@@ -1,0 +1,37 @@
+
+#pagination {
+    text-align: center;
+}
+#pagination li{
+    display: inline;
+    list-style-type: none;
+    padding-right: 20px;
+}
+
+table#bookListHeader td#isbnHeader{
+    width: 50px
+}
+
+table#bookList td.isbnRow{
+    width: 50px
+}
+
+table#bookListHeader td#titleHeader{
+    width: 100px
+}
+
+table#bookList td.titleRow{
+    width: 100px
+}
+
+table#bookListHeader td#languageHeader{
+    width: 100px
+}
+
+table#bookList td.languageRow{
+    width: 100px
+}
+
+table#bookList td.editRow{
+    width: 100px
+}

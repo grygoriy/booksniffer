@@ -4,8 +4,11 @@ class BookController {
     static defaultAction = "list"
 
     def list = {
-        def books = Book.list()
-        [books: books]
+        def elementsPerPage = (Integer)grailsApplication.config.booksniffer.pages.books
+        def books = Book.list(max:elementsPerPage)
+        Long bookAmount = Book.count()
+        def pages = (bookAmount / elementsPerPage).longValue()
+        [books: books, pages: pages]
     }
 
     def delete = {
