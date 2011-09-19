@@ -12,7 +12,7 @@
     <g:renderErrors/>
 </div>
 </g:hasErrors>
-<g:form name="editBook" action="doEdit" id="${book.BookId}">
+<g:form name="editBook" action="doEdit" id="${book.id}">
     <table>
         <tr>
             <td>${message(code: 'book.isbn')}</td>

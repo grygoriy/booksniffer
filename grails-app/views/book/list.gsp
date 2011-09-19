@@ -32,8 +32,8 @@
             <td class="isbnRow">${book.isbn}</td>
             <td class="titleRow">${book.title}</td>
             <td class="languageRow">${book.language.title}</td>
-            <td class="editRow"><g:link  action="edit" params="${[id:book.BookId]}">${message(code: 'edit')} </g:link></td>
-            <td class="deleteRow"><g:link  action="delete" params="${[id:book.BookId]}">${message(code: 'delete')}</g:link></td>
+            <td class="editRow"><g:link  action="edit" params="${[id:book.id]}">${message(code: 'edit')} </g:link></td>
+            <td class="deleteRow"><g:link  action="delete" params="${[id:book.id]}">${message(code: 'delete')}</g:link></td>
         </tr>
     </g:each>
 </table>

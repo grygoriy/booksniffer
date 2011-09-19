@@ -55,6 +55,12 @@ environments {
     }
     development {
         grails.serverURL = "http://localhost:8080/${appName}"
+        log4j = {
+            debug 'org.hibernate.SQL',
+                  'org.hibernate.type'
+//          'org.hibernate.cache'
+        }
+
     }
     test {
         grails.serverURL = "http://localhost:8080/${appName}"
