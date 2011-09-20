@@ -1,17 +1,17 @@
 package com.booksniffer
 
 import grails.converters.JSON
-import org.apache.commons.lang.StringUtils
-import org.hibernate.FetchMode
 
 class BookController {
     static defaultAction = "list"
+
+    def isbnFinderService
 
     def list = {
         def elementsPerPage = grailsApplication.config.booksniffer.pages.books
         def books = Book.list(max:elementsPerPage)
         Long bookAmount = Book.count()
-        def pages = (bookAmount / elementsPerPage).longValue()
+        def pages =  Math.ceil(bookAmount / elementsPerPage).intValue()
         [books: books, pages: pages]
     }
 
@@ -35,15 +35,19 @@ class BookController {
     }
 
     def edit = {
-        def book = Book.findByBookId(params.id)
+        def book = Book.findById(params.id)
         [book: book]
     }
 
     def doEdit = {
-        def book = Book.findByBookId(params.id)
+        def book = Book.findById(params.id)
         book.isbn = params.isbn
         book.title = params.title
+        book.authors = params.author
+        book.publisher = params.publisher
+        book.summary = params.summary
         book.language = Language.get(params.language)
+
         if (book.hasErrors() || !book.save()) {
             render (view: "edit", model:[book: book])
         } else {
@@ -51,14 +55,24 @@ class BookController {
         }
     }
 
+    def checkByIsbn = {
+        render isbnFinderService.getByIsbn(params.isbn) as JSON
+    }
+
     def add = {
 
     }
     def doAdd = {
-        def book = new Book(title: params.title, isbn: params.isbn)
+        def book = new Book(title: params.title,
+                            isbn: params.isbn,
+                authors: params.author,
+                publisher: params.publisher,
+                summary: params.summary)
         book.language = Language.get(params.language)
-        book.BookId = UUID.randomUUID().toString()
-        book.save()
-        redirect(action: 'list')
+        if (book.hasErrors() || !book.save()) {
+            render (view: "add", model:[book: book])
+        } else {
+            redirect(action: "list")
+        }
     }
 }

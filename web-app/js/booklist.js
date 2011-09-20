@@ -7,6 +7,11 @@
  */
 
 $(document).ready(function() {
+    var pages = $('#pages').val();
+    $('#pagination').html('');
+    for (var i = 1; i <= pages; i++) {
+        $('#pagination').append("<li><a href='javascript:getPageData(" + i + ")'>" + i + "</a> </li>")
+    }
 
     $('ul#pagination li a').click(function() {
         getPageData($(this).text())
