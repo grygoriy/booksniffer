@@ -63,8 +63,9 @@ class BookController {
 
     }
     def doAdd = {
-        def book = new Book(title: params.title,
-                            isbn: params.isbn,
+        def book = new Book(
+                title: params.title,
+                isbn: params.isbn,
                 authors: params.author,
                 publisher: params.publisher,
                 summary: params.summary)
