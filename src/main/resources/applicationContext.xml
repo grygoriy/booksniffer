@@ -1,0 +1,91 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd 
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee.xsd 
+	http://www.springframework.org/schema/lang 
+	http://www.springframework.org/schema/lang/spring-lang.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd 
+	http://www.springframework.org/schema/util 
+	http://www.springframework.org/schema/util/spring-util.xsd">
+	<!-- Root Context: describes resources which are accessible for all project and for all servlets -->
+	<!-- Switching on option of using configuration annotations (@Annotation-based 
+		configuration) -->
+	<context:annotation-config />
+	<!-- Describe folders in which we will automaticaly look for bean-components 
+		(@Component, @Service) -->
+	<context:component-scan base-package="com.cyonide.booksniffer" />
+	
+	<tx:annotation-driven />
+
+	<!-- HIBERNATE TRANSACTION MANAGER -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- HIBERNATE SESSION FACTORY -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.connection.pool_size">5</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.hibernate.cache.use_query_cache">true</prop>
+				<prop key="c3p0.max_size">25</prop>
+				<prop key="c3p0.min_size">5</prop>
+				<prop key="c3p0.timeout">600</prop>
+				<prop key="c3p0.max_statements">200</prop>
+				<prop key="c3p0.idle_test_period">300</prop>
+				<prop key="c3p0.acquire_increment">3</prop>
+				<!-- <prop key="hibernate.cglib.use_reflection_optimizer">true</prop> 
+					prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop> -->
+				
+			</props>
+		</property>
+		<property name="packagesToScan">
+			<list>
+				<value>com.cyonide.booksniffer.dao</value>
+				<value>com.cyonide.booksniffer.entities</value>
+				<value>com.cyonide.booksniffer.controller</value>
+			</list>
+		</property>
+		</bean>
+		
+		<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate" >
+			<property name="sessionFactory" ref="sessionFactory" />
+		</bean>
+		
+		<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+			p:driverClass="com.mysql.jdbc.Driver" p:jdbcUrl="jdbc:mysql://localhost:3306/booksniffer"
+			p:user="root" p:password="root"
+			p:automaticTestTable="_c3p0_check" p:maxConnectionAge="3600"
+			p:maxIdleTimeExcessConnections="1800" p:minPoolSize="5"
+			p:maxPoolSize="25" p:maxStatements="200"
+			p:maxStatementsPerConnection="20" p:testConnectionOnCheckin="true"
+			p:idleConnectionTestPeriod="900" />
+		
+		<bean id="propertyConfigurer"
+			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+			<property name="locations">
+				<list>
+					<value>classpath:dataSource-development.properties</value>
+				</list>
+			</property>
+		</bean>
+	
+
+</beans>
