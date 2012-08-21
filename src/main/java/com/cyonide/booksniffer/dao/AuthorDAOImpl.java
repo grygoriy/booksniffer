@@ -1,13 +1,12 @@
 package com.cyonide.booksniffer.dao;
 
-import java.util.List;
-
-import org.apache.commons.lang.NotImplementedException;
+import com.cyonide.booksniffer.entities.Author;
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.cyonide.booksniffer.entities.Author;
+import java.util.List;
 
 @Repository
 public class AuthorDAOImpl implements AuthorDAO {
@@ -47,8 +46,9 @@ public class AuthorDAOImpl implements AuthorDAO {
 	}
 
 	@Override
+    @SuppressWarnings("unchecked")
 	public List<Author> listAuthor() {
-		throw new NotImplementedException();
+		return hibernateTemplate.findByCriteria(DetachedCriteria.forClass(Author.class));
 		
 	}
 

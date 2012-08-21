@@ -27,13 +27,13 @@
 
 	<table>
 		<tr>
-			<th>Value</th>
-			<th>Square</th>
+			<th>Name</th>
+			<th>Last Name</th>
 		</tr>
-		<c:forEach var="x" begin="0" end="18" step="2">
+		<c:forEach var="author" items="${authors}">
 			<tr>
-				<td><c:out value="${x}" /></td>
-				<td><c:out value="${x * x}" /></td>
+				<td>${author.authorName}</td>
+				<td>${author.authorLastName}</td>
 			</tr>
 		</c:forEach>
 	</table>

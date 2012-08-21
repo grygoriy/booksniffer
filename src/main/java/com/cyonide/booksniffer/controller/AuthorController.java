@@ -42,7 +42,7 @@ public class AuthorController {
     @RequestMapping("/authorList")
     public String authorList(ModelMap modelMap){
     	 List<Author> authors = authorDAO.listAuthor();
-    	 modelMap.addAttribute("author", authors);
+    	 modelMap.addAttribute("authors", authors);
     	 for(Author author : authors){
     		 System.out.println("Author name: " + author.getAuthorName() + " Last name " + author.getAuthorLastName());
     	 }
