@@ -1,9 +1,9 @@
 package com.cyonide.booksniffer.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,10 +27,9 @@ public class AuthorController {
         
         System.out.println("Author Name " + author.getAuthorName());
         System.out.println("Author Last Name "+ author.getAuthorLastName());
-
         authorDAO.addAuthor(author);
-           
-        return "redirect:author.html";
+        
+        return "redirect:authorList.html";
     }
     
     
@@ -39,6 +38,19 @@ public class AuthorController {
         return new ModelAndView("author", "command", new Author());
     }
     
+    
+    @RequestMapping("/authorList")
+    public String authorList(ModelMap modelMap){
+    	 List<Author> authors = authorDAO.listAuthor();
+    	 modelMap.addAttribute("author", authors);
+    	 for(Author author : authors){
+    		 System.out.println("Author name: " + author.getAuthorName() + " Last name " + author.getAuthorLastName());
+    	 }
+    	 return "authorList";
+    }
+    
+    
+       
 }
     
     
